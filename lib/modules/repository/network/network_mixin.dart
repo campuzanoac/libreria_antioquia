@@ -3,6 +3,14 @@ import 'dart:convert';
 import '../entities/book.dart';
 import 'package:http/http.dart' as http;
 
+import '../entities/book_detail.dart';
+
+/// Se opta por escoger un mixin ya que no es necesario agregar la
+/// complejidad que un patrón repositorio tendría.
+///
+/// Los llamados a la API no requieren de ningún Key, autenticación, o
+/// algún Header especial en particular
+/// por lo que se opta por mantenerla simple.
 mixin NetworkMixin {
   final baseUrl = 'https://api.itbook.store/1.0';
 
@@ -25,6 +33,16 @@ mixin NetworkMixin {
 
     if (response.statusCode == 200) {
       return Books.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Item not found or an error occurred');
+    }
+  }
+
+  Future<BookDetail> fetchBookDetails(String isbn) async {
+    final response = await http.get(Uri.parse('$baseUrl/books/$isbn'));
+
+    if (response.statusCode == 200) {
+      return BookDetail.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Item not found or an error occurred');
     }

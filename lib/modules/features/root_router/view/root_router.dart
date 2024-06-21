@@ -1,6 +1,8 @@
-import 'package:bookstore/modules/features/book_detail/view/book_detail_view.dart';
 import 'package:flutter/material.dart';
+
 import '../../search/assembly/search_assembly.dart' as search_assembly;
+import '../../book_detail/assembly/book_detail_assembly.dart'
+    as book_detail_assembly;
 import 'package:bookstore/modules/features/root_router/presenter/root_router_presenter.dart';
 import 'package:bookstore/modules/features/root_router/presenter/root_router_presenter_output.dart';
 
@@ -65,7 +67,7 @@ extension on RootRouterPresenterOutput {
     return switch (this) {
       ShowBookDetail(:final isbn) => MaterialPage(
           key: const ValueKey('book_detail_view'),
-          child: BookDetailView(isbn: isbn),
+          child: book_detail_assembly.Assembly(isbn).bookDetailView,
         ),
       _ => MaterialPage(child: Container()),
     };
