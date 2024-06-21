@@ -1,5 +1,9 @@
-import 'package:bookstore/modules/features/search/presenter/new_releases_view_model.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bookstore/modules/common/bloc/bloc_provider.dart';
+import 'package:bookstore/modules/features/search/presenter/new_releases_view_model.dart';
+
+import '../../presenter/search_presenter.dart';
 
 class GridBookCard extends StatelessWidget {
   final NewBookRowViewModel model;
@@ -7,8 +11,12 @@ class GridBookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final searchPresenter = BlocProvider.of<SearchPresenter>(context)!;
+
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        searchPresenter.eventBookCardTapped(model.index);
+      },
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

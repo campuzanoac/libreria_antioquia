@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SearchAppBar extends StatefulWidget {
   final void Function(String value) onSearchTapped;
-  final ({bool textFieldEnabled}) enabled;
+  final ({bool textFieldEnabled, bool buttonEnabled}) enabled;
 
   const SearchAppBar({
     super.key,
@@ -63,10 +63,13 @@ class _SearchAppBarState extends State<SearchAppBar> {
                     ),
                   ),
                 ),
+                const SizedBox(width: 4),
                 TextButton(
-                  onPressed: () {
-                    widget.onSearchTapped.call(_controller.text);
-                  },
+                  onPressed: widget.enabled.buttonEnabled
+                      ? () {
+                          widget.onSearchTapped.call(_controller.text);
+                        }
+                      : null,
                   child: const Text('Buscar'),
                 ),
               ],

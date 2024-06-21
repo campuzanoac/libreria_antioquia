@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:bookstore/modules/common/bloc/bloc_builder_data.dart';
 import 'package:bookstore/modules/common/stateful_setter/stateful_setter.dart';
+import 'package:bookstore/modules/features/book_detail/presenter/book_detail_presenter.dart';
+import 'package:bookstore/modules/features/book_detail/presenter/book_detail_view_model.dart';
 import 'package:bookstore/modules/features/book_detail/presenter/book_detail_presenter_output.dart';
 
-import 'package:bookstore/modules/features/book_detail/presenter/book_detail_presenter.dart';
+part 'book_detail_view_with_model.dart';
 
 class BookDetailView extends StatefulWidget {
   final BookDetailPresenter presenter;
@@ -26,6 +29,7 @@ class _BookDetailViewState extends State<BookDetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       appBar: AppBar(
         automaticallyImplyLeading: true,
         elevation: 0.0,
@@ -36,20 +40,24 @@ class _BookDetailViewState extends State<BookDetailView> {
             }),
       ),
       body: SafeArea(
-          child:
-              BlocBuilderData<BookDetailPresenter, BookDetailPresenterOutput>(
-        bloc: _presenter,
-        builder: (context, data) {
-          switch (data) {
-            case ShowLoading():
-              StatefulSetter.value(key: _appBarKey, value: '');
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            case ShowModel():
-              return Container();
-          }
-        },
+          child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: BlocBuilderData<BookDetailPresenter, BookDetailPresenterOutput>(
+          bloc: _presenter,
+          builder: (context, data) {
+            switch (data) {
+              case ShowLoading():
+                StatefulSetter.value(key: _appBarKey, value: '');
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              case ShowModel(:final viewModel):
+                StatefulSetter.value(
+                    key: _appBarKey, value: viewModel.bookDetailRowModel.title);
+                return _BookDetailViewWithModel(viewModel: viewModel);
+            }
+          },
+        ),
       )),
     );
   }

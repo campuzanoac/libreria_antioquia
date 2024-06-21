@@ -39,7 +39,7 @@ class _SearchViewState extends State<SearchView> {
         backgroundColor: Theme.of(context).secondaryHeaderColor,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight + 80),
-          child: StatefulSetter<({bool textFieldEnabled})>(
+          child: StatefulSetter<({bool textFieldEnabled, bool buttonEnabled})>(
             key: _appBarKey,
             builder: (context, enabled) => SearchAppBar(
               enabled: enabled,
@@ -56,11 +56,13 @@ class _SearchViewState extends State<SearchView> {
               switch (data) {
                 case ShowLoading():
                   StatefulSetter.value(
-                      key: _appBarKey, value: (textFieldEnabled: false));
+                      key: _appBarKey,
+                      value: (textFieldEnabled: false, buttonEnabled: false));
                   return const Center(child: CircularProgressIndicator());
                 case ShowSearchResult(:final searchViewModel):
                   StatefulSetter.value(
-                      key: _appBarKey, value: (textFieldEnabled: true));
+                      key: _appBarKey,
+                      value: (textFieldEnabled: true, buttonEnabled: true));
                   return _SearchViewWithModel(
                     viewModel: searchViewModel,
                     loadPaginatedCallback: () {
@@ -69,7 +71,8 @@ class _SearchViewState extends State<SearchView> {
                   );
                 case ShowNewReleases(:final newReleasesViewModel):
                   StatefulSetter.value(
-                      key: _appBarKey, value: (textFieldEnabled: true));
+                      key: _appBarKey,
+                      value: (textFieldEnabled: true, buttonEnabled: true));
                   return _SearchViewNewReleases(
                       viewModel: newReleasesViewModel);
               }
