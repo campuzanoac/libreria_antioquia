@@ -31,6 +31,8 @@ class BookCard extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontSize: 12,
                   ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
             leading: Image.network(model.image),
             trailing: const Icon(
