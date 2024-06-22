@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'search_app_bar.dart';
+import 'package:bookstore/modules/common/constants/text_strings.dart';
 import 'package:bookstore/modules/common/bloc/bloc_builder_data.dart';
 import 'package:bookstore/modules/features/search/view/recent_searches.dart';
 import 'package:bookstore/modules/common/stateful_setter/stateful_setter.dart';

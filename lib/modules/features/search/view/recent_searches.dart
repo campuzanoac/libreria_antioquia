@@ -1,6 +1,7 @@
-import 'package:bookstore/modules/common/bloc/bloc_provider.dart';
-import 'package:bookstore/modules/features/search/presenter/search_presenter.dart';
 import 'package:flutter/material.dart';
+import 'package:bookstore/modules/common/bloc/bloc_provider.dart';
+import 'package:bookstore/modules/common/constants/text_strings.dart';
+import 'package:bookstore/modules/features/search/presenter/search_presenter.dart';
 
 class RecentSearches extends StatelessWidget {
   final List<String> recentSearches;
@@ -20,20 +21,13 @@ class RecentSearches extends StatelessWidget {
               horizontal: 16.0,
             ),
             child: Text(
-              'Búsquedas recientes...',
+              TextStrings.recentSearches,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
             ),
           ),
-          if (recentSearches.isEmpty) ...[
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text('No tienes búquedas recientes aún.'),
-            ),
-          ] else ...[
-            _RecentSearchesList(recentSearches: recentSearches),
-          ],
+          _RecentSearchesList(recentSearches: recentSearches),
         ],
       ),
     );

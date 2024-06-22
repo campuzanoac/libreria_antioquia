@@ -1,3 +1,4 @@
+import 'package:bookstore/modules/common/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 
 class SearchAppBar extends StatefulWidget {
@@ -42,7 +43,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Librería Antioquia',
+              TextStrings.appTitle,
               style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

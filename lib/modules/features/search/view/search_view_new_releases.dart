@@ -25,7 +25,7 @@ class _SearchViewNewReleases extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Descubre nuevos lanzamientos',
+                  TextStrings.recommended,
                   style: Theme.of(context)
                       .textTheme
                       .headlineSmall!

@@ -79,7 +79,7 @@ class _EmptyListCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Oops! No se encontraron resultados para esa búsqueda.\n\nIntenta con otro término.',
+                TextStrings.noResultsFound,
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               )

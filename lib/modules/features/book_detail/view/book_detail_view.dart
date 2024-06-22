@@ -1,3 +1,4 @@
+import 'package:bookstore/modules/common/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookstore/modules/common/bloc/bloc_builder_data.dart';
@@ -36,7 +37,7 @@ class _BookDetailViewState extends State<BookDetailView> {
         title: StatefulSetter<String>(
             key: _appBarKey,
             builder: (context, data) {
-              return Text(data);
+              return Text(data, style: Theme.of(context).textTheme.bodyLarge);
             }),
       ),
       body: SafeArea(

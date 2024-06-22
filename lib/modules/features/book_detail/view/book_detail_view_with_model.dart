@@ -55,7 +55,7 @@ class _BookDetailViewWithModel extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Sinopsis',
+                      TextStrings.synopsis,
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
@@ -84,7 +84,7 @@ class _BookDetailViewWithModel extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Autor:',
+                      TextStrings.authors,
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
@@ -114,7 +114,7 @@ class _BookDetailViewWithModel extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Año publicado:',
+                      TextStrings.publishedYear,
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
