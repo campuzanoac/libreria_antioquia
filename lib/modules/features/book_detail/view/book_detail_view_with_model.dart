@@ -7,6 +7,7 @@ class _BookDetailViewWithModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      padding: const EdgeInsets.only(bottom: 32),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -14,7 +15,6 @@ class _BookDetailViewWithModel extends StatelessWidget {
           Center(
             child: Image.network(
               viewModel.bookDetailRowModel.image,
-              fit: BoxFit.fill,
             ),
           ),
           Align(
@@ -84,7 +84,7 @@ class _BookDetailViewWithModel extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Autor(es):',
+                      'Autor:',
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
@@ -93,6 +93,8 @@ class _BookDetailViewWithModel extends StatelessWidget {
                     Text(
                       viewModel.bookDetailRowModel.authors,
                       textAlign: TextAlign.justify,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
                     ),
                   ],
                 ),

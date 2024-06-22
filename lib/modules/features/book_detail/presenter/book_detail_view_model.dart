@@ -25,7 +25,7 @@ class BookDetailRowModel {
   BookDetailRowModel(BookDetailPresentationRowModel rowModel)
       : title = rowModel.title,
         subtitle = rowModel.subtitle,
-        authors = rowModel.authors,
+        authors = rowModel.authors.replaceAll(RegExp(r', '), '\n'),
         language = rowModel.language,
         pages = rowModel.pages,
         year = rowModel.year,

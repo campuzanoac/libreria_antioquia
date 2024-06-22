@@ -24,7 +24,7 @@ class GridBookCard extends StatelessWidget {
             children: [
               Image.network(
                 model.image,
-                height: 120,
+                height: 105,
                 width: 100,
                 fit: BoxFit.cover,
               ),

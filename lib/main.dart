@@ -3,6 +3,7 @@ import 'package:bookstore/modules/features/root_router/assembly/root_router_asse
     as root_router;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const BookstoreApp());
 }
 

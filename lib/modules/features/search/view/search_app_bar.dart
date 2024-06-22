@@ -38,6 +38,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
       ),
       child: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
