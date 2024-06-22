@@ -19,10 +19,13 @@ void main() {
         stream,
         emitsInOrder([
           isA<PresentLoading>(),
-          isA<PresentNewReleases>().having(
-              (x) => x.newReleasesPresentationModel.rows,
-              'list of presentationrowmodels',
-              isA<List<NewReleasePresentationRowModel>>()),
+          isA<PresentNewReleases>()
+              .having(
+                  (x) => x.newReleasesPresentationModel.rows,
+                  'list of presentationrowmodels',
+                  isA<List<NewReleasePresentationRowModel>>())
+              .having((x) => x.newReleasesPresentationModel.recentSearchesRow,
+                  'list of recent searches', isA<List<String>>()),
         ]));
     await pumpEventQueue();
   });
@@ -32,24 +35,39 @@ void main() {
         stream,
         emitsInOrder([
           isA<PresentLoading>(),
-          isA<PresentModel>().having(
-              (x) => x.searchPresentationModel.rows,
-              'list of presentationrowmodels',
-              isA<List<SearchPresentationRowModel>>()),
+          isA<PresentModel>()
+              .having(
+                  (x) => x.searchPresentationModel.rows,
+                  'list of presentationrowmodels',
+                  isA<List<SearchPresentationRowModel>>())
+              .having((x) => x.searchPresentationModel.recentSearchesRow,
+                  'list of recent searches', isA<List<String>>()),
         ]));
     await searchUseCase.eventSearchTapped('test');
     await pumpEventQueue();
   });
 
-  test('emit showBookDetail when card is tapped', () async {
+  test('emit showBookDetail when bookcard is tapped', () async {
     expectLater(
       stream,
       emitsInOrder([
-        isA<PresentBookDetail>(),
+        isA<PresentBookDetail>().having((x) => x.isbn, 'isbn', isA<String>()),
       ]),
     );
 
     searchUseCase.eventBookCardTapped(1);
+    await pumpEventQueue();
+  });
+
+  test('emit model when lazy loading', () async {
+    expectLater(
+      stream,
+      emitsInOrder([
+        isA<PresentModel>(),
+      ]),
+    );
+
+    await searchUseCase.eventLoadPaginatedData();
     await pumpEventQueue();
   });
 }
