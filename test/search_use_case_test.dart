@@ -9,9 +9,14 @@ void main() {
   final searchUseCase = SearchUseCase();
 
   final stream = searchUseCase.stream.asBroadcastStream();
+
   setUp(() async {
     SharedPreferences.setMockInitialValues({});
     await SharedPreferences.getInstance();
+  });
+
+  tearDownAll(() {
+    searchUseCase.dispose();
   });
 
   test('emit loading and newReleases when initializing', () async {
@@ -63,7 +68,13 @@ void main() {
     expectLater(
       stream,
       emitsInOrder([
-        isA<PresentModel>(),
+        isA<PresentModel>()
+            .having(
+                (x) => x.searchPresentationModel.rows,
+                'list of presentationrowmodels',
+                isA<List<SearchPresentationRowModel>>())
+            .having((x) => x.searchPresentationModel.recentSearchesRow,
+                'list of recent searches', isA<List<String>>()),
       ]),
     );
 
